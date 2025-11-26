@@ -6,3 +6,9 @@ spring:
     url: jdbc:mysql://192.168.117.129:3306/blog
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: 8910jqkA@
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
