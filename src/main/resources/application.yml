@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: blog
+  datasource:
+    username: blog
+    url: jdbc:mysql://192.168.117.129:3306/blog
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: 8910jqkA@
