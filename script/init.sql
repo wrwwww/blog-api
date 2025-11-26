@@ -94,8 +94,7 @@ CREATE TABLE sys_code_value
 ) COMMENT ='码表值表';
 
 insert into sys_code_type(id, code_type, name)
-VALUES ('0', 'status', '有效标志'),
-       ('', '', '');
+VALUES ('0', 'status', '有效标志');
 insert into sys_code_value(type_id, code_value, code_label, is_active)
 VALUES ('0', 'Y', '启用', 1),
        ('0', 'N', '禁用', 1);
