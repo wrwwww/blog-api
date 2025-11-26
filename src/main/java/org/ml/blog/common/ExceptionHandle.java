@@ -2,10 +2,13 @@ package org.ml.blog.common;
 
 
 import org.ml.blog.exception.BizException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@ControllerAdvice
+import java.util.Objects;
+
+@RestControllerAdvice
 public class ExceptionHandle {
 
     @ExceptionHandler(Exception.class)
@@ -17,4 +20,13 @@ public class ExceptionHandle {
     public Result<?> handleBizException(BizException e) {
         return Result.error(e.getCode(), e.getMessage());
     }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Object handle(MethodArgumentNotValidException ex) {
+        String msg =
+                Objects.requireNonNull(ex.getBindingResult().getFieldError()).getDefaultMessage();
+        return Result.error(ResultCode.PARAM_LOST.getCode(), msg);
+    }
+
+
 }

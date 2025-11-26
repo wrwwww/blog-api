@@ -2,6 +2,7 @@ package org.ml.blog.domain.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
@@ -13,9 +14,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UuidGenerator;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -27,6 +32,7 @@ import java.util.Date;
 @Getter
 @NoArgsConstructor
 @Setter
+@EntityListeners(AuditingEntityListener.class)
 public class SysCodeType implements Serializable {
 
     /**
@@ -57,17 +63,14 @@ public class SysCodeType implements Serializable {
     @Size(max = 255, message = "编码长度不能超过255")
     @Schema(description = "说明")
     private String description;
-    /**
-     * 创建时间
-     */
-    @Schema(description = "创建时间")
-    private Date createdAt;
-    /**
-     * 更新时间
-     */
-    @Schema(description = "更新时间")
-    private Date updatedAt;
 
+    @CreatedDate
+    @Schema(description = "创建时间")
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    @Schema(description = "更新时间")
+    private LocalDateTime updatedAt;
 
 
 }

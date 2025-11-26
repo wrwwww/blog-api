@@ -7,4 +7,10 @@ import java.util.List;
 
 public interface SysCodeValueRepository extends JpaRepository<SysCodeValue, Long> {
     List<SysCodeValue> findByTypeId(String typeId);
+
+    SysCodeValue findByCodeValue(String codeValue);
+
+    SysCodeValue findSysCodeValueById(String id);
+
+    Boolean deleteSysCodeValueById(String id);
 }
