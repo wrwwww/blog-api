@@ -2,9 +2,15 @@ package org.ml.blog.entity;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.io.Serializable;
 
@@ -14,13 +20,19 @@ import java.util.Date;
 * 码表值表
 * @TableName sys_code_value
 */
+@Entity
+@Getter
+@Setter
 public class SysCodeValue implements Serializable {
 
     /**
     * 
     */
-    @NotNull(message="[]不能为空")
-    @Schema(description="")
+    @Id
+    @NotNull(message = "[]不能为空")
+    @GeneratedValue
+    @UuidGenerator
+
     private String id;
     /**
     * 码表类型ID，外键引用 sys_code_type.id
@@ -69,131 +81,6 @@ public class SysCodeValue implements Serializable {
     @Schema(description="更新时间")
     private Date updatedAt;
 
-    /**
-    * 
-    */
-    private void setId(String id){
-    this.id = id;
-    }
 
-    /**
-    * 码表类型ID，外键引用 sys_code_type.id
-    */
-    private void setTypeId(String typeId){
-    this.typeId = typeId;
-    }
-
-    /**
-    * 实际存储值，如 admin/draft/published
-    */
-    private void setCodeValue(String codeValue){
-    this.codeValue = codeValue;
-    }
-
-    /**
-    * 显示名称，如 管理员/草稿/已发布
-    */
-    private void setCodeLabel(String codeLabel){
-    this.codeLabel = codeLabel;
-    }
-
-    /**
-    * 备注
-    */
-    private void setDescription(String description){
-    this.description = description;
-    }
-
-    /**
-    * 排序，用于前端显示顺序
-    */
-    private void setSortOrder(Integer sortOrder){
-    this.sortOrder = sortOrder;
-    }
-
-    /**
-    * 是否启用，0=禁用,1=启用
-    */
-    private void setIsActive(Integer isActive){
-    this.isActive = isActive;
-    }
-
-    /**
-    * 创建时间
-    */
-    private void setCreatedAt(Date createdAt){
-    this.createdAt = createdAt;
-    }
-
-    /**
-    * 更新时间
-    */
-    private void setUpdatedAt(Date updatedAt){
-    this.updatedAt = updatedAt;
-    }
-
-
-    /**
-    * 
-    */
-    private String getId(){
-    return this.id;
-    }
-
-    /**
-    * 码表类型ID，外键引用 sys_code_type.id
-    */
-    private String getTypeId(){
-    return this.typeId;
-    }
-
-    /**
-    * 实际存储值，如 admin/draft/published
-    */
-    private String getCodeValue(){
-    return this.codeValue;
-    }
-
-    /**
-    * 显示名称，如 管理员/草稿/已发布
-    */
-    private String getCodeLabel(){
-    return this.codeLabel;
-    }
-
-    /**
-    * 备注
-    */
-    private String getDescription(){
-    return this.description;
-    }
-
-    /**
-    * 排序，用于前端显示顺序
-    */
-    private Integer getSortOrder(){
-    return this.sortOrder;
-    }
-
-    /**
-    * 是否启用，0=禁用,1=启用
-    */
-    private Integer getIsActive(){
-    return this.isActive;
-    }
-
-    /**
-    * 创建时间
-    */
-    private Date getCreatedAt(){
-    return this.createdAt;
-    }
-
-    /**
-    * 更新时间
-    */
-    private Date getUpdatedAt(){
-    return this.updatedAt;
-    }
 
 }

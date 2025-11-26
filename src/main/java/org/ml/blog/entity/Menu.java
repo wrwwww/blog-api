@@ -6,14 +6,25 @@ import java.io.Serializable;
 import java.util.Date;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.UuidGenerator;
 
 /**
  * 角色表
  *
  * @TableName menu
  */
+
+@Entity
+
+@Getter
+@Setter
 public class Menu implements Serializable {
 
     /**
@@ -21,6 +32,9 @@ public class Menu implements Serializable {
      */
     @NotNull(message = "[主键]不能为空")
     @Schema(description = "主键")
+    @Id
+    @GeneratedValue
+    @UuidGenerator
     private String id;
     /**
      * 权限名
@@ -56,103 +70,5 @@ public class Menu implements Serializable {
     @Schema(description="更新时间")
     private Date updatedAt;
 
-    /**
-     * 主键
-     */
-    private void setId(String id) {
-        this.id = id;
-    }
-
-    /**
-     * 权限名
-     */
-    private void setMenuName(String menuName) {
-        this.menuName = menuName;
-    }
-
-    /**
-     * 权限类型
-     */
-    private void setMenuType(Integer menuType) {
-        this.menuType = menuType;
-    }
-
-    /**
-     * 父节点id
-     */
-    private void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
-
-    /**
-     * 是否有父节点
-     */
-    private void setIsParent(Integer isParent) {
-        this.isParent = isParent;
-    }
-
-    /**
-     * 创建时间
-     */
-    private void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    /**
-     * 更新时间
-     */
-    private void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-
-    /**
-     * 主键
-     */
-    private String getId() {
-        return this.id;
-    }
-
-    /**
-     * 权限名
-     */
-    private String getMenuName() {
-        return this.menuName;
-    }
-
-    /**
-     * 权限类型
-     */
-    private Integer getMenuType() {
-        return this.menuType;
-    }
-
-    /**
-     * 父节点id
-     */
-    private Long getParentId() {
-        return this.parentId;
-    }
-
-    /**
-     * 是否有父节点
-     */
-    private Integer getIsParent() {
-        return this.isParent;
-    }
-
-    /**
-     * 创建时间
-     */
-    private Date getCreatedAt() {
-        return this.createdAt;
-    }
-
-    /**
-     * 更新时间
-     */
-    private Date getUpdatedAt() {
-        return this.updatedAt;
-    }
 
 }

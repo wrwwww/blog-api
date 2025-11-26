@@ -1,9 +1,15 @@
 package org.ml.blog.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.io.Serializable;
 
@@ -13,6 +19,11 @@ import java.io.Serializable;
  *
  * @TableName tags
  */
+
+@Entity
+
+@Getter
+@Setter
 public class Tags implements Serializable {
 
     /**
@@ -20,6 +31,9 @@ public class Tags implements Serializable {
      */
     @NotNull(message = "[标签ID]不能为空")
     @Schema(description="标签ID")
+    @Id
+    @GeneratedValue
+    @UuidGenerator
     private String id;
     /**
      * 标签名称
@@ -29,33 +43,5 @@ public class Tags implements Serializable {
     @Schema(description = "标签名称")
     private String name;
 
-    /**
-     * 标签ID
-     */
-    private void setId(String id) {
-        this.id = id;
-    }
-
-    /**
-     * 标签名称
-     */
-    private void setName(String name) {
-        this.name = name;
-    }
-
-
-    /**
-     * 标签ID
-     */
-    private String getId() {
-        return this.id;
-    }
-
-    /**
-     * 标签名称
-     */
-    private String getName() {
-        return this.name;
-    }
 
 }

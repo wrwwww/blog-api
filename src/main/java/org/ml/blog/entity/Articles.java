@@ -3,9 +3,15 @@ package org.ml.blog.entity;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.io.Serializable;
 
@@ -15,6 +21,10 @@ import java.util.Date;
 * 文章表
 * @TableName articles
 */
+
+@Entity
+@Getter
+@Setter
 public class Articles implements Serializable {
 
     /**
@@ -22,6 +32,9 @@ public class Articles implements Serializable {
     */
     @NotNull(message="[文章ID]不能为空")
     @Schema(description="文章ID")
+    @Id
+    @GeneratedValue
+    @UuidGenerator
     private String id;
     /**
     * 作者ID，关联 users.id
@@ -76,145 +89,5 @@ public class Articles implements Serializable {
     @Schema(description="最后更新时间")
     private Date updatedAt;
 
-    /**
-    * 文章ID
-    */
-    private void setId(String id){
-    this.id = id;
-    }
-
-    /**
-    * 作者ID，关联 users.id
-    */
-    private void setAuthorId(String authorId){
-    this.authorId = authorId;
-    }
-
-    /**
-    * 文章标题
-    */
-    private void setTitle(String title){
-    this.title = title;
-    }
-
-    /**
-    * 文章正文
-    */
-    private void setContent(String content){
-    this.content = content;
-    }
-
-    /**
-    * 文章摘要
-    */
-    private void setExcerpt(String excerpt){
-    this.excerpt = excerpt;
-    }
-
-    /**
-    * 封面图URL
-    */
-    private void setCoverImage(String coverImage){
-    this.coverImage = coverImage;
-    }
-
-    /**
-    * 文章状态，参照码表
-    */
-    private void setStatus(String status){
-    this.status = status;
-    }
-
-    /**
-    * 阅读量
-    */
-    private void setViews(Integer views){
-    this.views = views;
-    }
-
-    /**
-    * 创建时间
-    */
-    private void setCreatedAt(Date createdAt){
-    this.createdAt = createdAt;
-    }
-
-    /**
-    * 最后更新时间
-    */
-    private void setUpdatedAt(Date updatedAt){
-    this.updatedAt = updatedAt;
-    }
-
-
-    /**
-    * 文章ID
-    */
-    private String getId(){
-    return this.id;
-    }
-
-    /**
-    * 作者ID，关联 users.id
-    */
-    private String getAuthorId(){
-    return this.authorId;
-    }
-
-    /**
-    * 文章标题
-    */
-    private String getTitle(){
-    return this.title;
-    }
-
-    /**
-    * 文章正文
-    */
-    private String getContent(){
-    return this.content;
-    }
-
-    /**
-    * 文章摘要
-    */
-    private String getExcerpt(){
-    return this.excerpt;
-    }
-
-    /**
-    * 封面图URL
-    */
-    private String getCoverImage(){
-    return this.coverImage;
-    }
-
-    /**
-    * 文章状态，参照码表
-    */
-    private String getStatus(){
-    return this.status;
-    }
-
-    /**
-    * 阅读量
-    */
-    private Integer getViews(){
-    return this.views;
-    }
-
-    /**
-    * 创建时间
-    */
-    private Date getCreatedAt(){
-    return this.createdAt;
-    }
-
-    /**
-    * 最后更新时间
-    */
-    private Date getUpdatedAt(){
-    return this.updatedAt;
-    }
 
 }

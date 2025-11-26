@@ -1,9 +1,15 @@
 package org.ml.blog.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.io.Serializable;
 
@@ -13,6 +19,9 @@ import java.util.Date;
 * 用户表
 * @TableName user
 */
+@Entity
+@Getter
+@Setter
 public class User implements Serializable {
 
     /**
@@ -20,6 +29,9 @@ public class User implements Serializable {
     */
     @NotNull(message="[主键]不能为空")
     @Schema(description="主键")
+    @Id
+    @GeneratedValue
+    @UuidGenerator
     private String id;
     /**
     * 用户名
@@ -51,6 +63,7 @@ public class User implements Serializable {
     */
     @Size(max= 255,message="编码长度不能超过255")
     @Schema(description="头像链接")
+
     private String avatar;
     /**
     * 创建时间
@@ -63,117 +76,5 @@ public class User implements Serializable {
     @Schema(description="更新时间")
     private Date updatedAt;
 
-    /**
-    * 主键
-    */
-    private void setId(String id){
-    this.id = id;
-    }
-
-    /**
-    * 用户名
-    */
-    private void setUsername(String username){
-    this.username = username;
-    }
-
-    /**
-    * 邮箱
-    */
-    private void setEmail(String email){
-    this.email = email;
-    }
-
-    /**
-    * 昵称
-    */
-    private void setNickname(String nickname){
-    this.nickname = nickname;
-    }
-
-    /**
-    * 密码哈希
-    */
-    private void setPassword(String password){
-    this.password = password;
-    }
-
-    /**
-    * 头像链接
-    */
-    private void setAvatar(String avatar){
-    this.avatar = avatar;
-    }
-
-    /**
-    * 创建时间
-    */
-    private void setCreatedAt(Date createdAt){
-    this.createdAt = createdAt;
-    }
-
-    /**
-    * 更新时间
-    */
-    private void setUpdatedAt(Date updatedAt){
-    this.updatedAt = updatedAt;
-    }
-
-
-    /**
-    * 主键
-    */
-    private String getId(){
-    return this.id;
-    }
-
-    /**
-    * 用户名
-    */
-    private String getUsername(){
-    return this.username;
-    }
-
-    /**
-    * 邮箱
-    */
-    private String getEmail(){
-    return this.email;
-    }
-
-    /**
-    * 昵称
-    */
-    private String getNickname(){
-    return this.nickname;
-    }
-
-    /**
-    * 密码哈希
-    */
-    private String getPassword(){
-    return this.password;
-    }
-
-    /**
-    * 头像链接
-    */
-    private String getAvatar(){
-    return this.avatar;
-    }
-
-    /**
-    * 创建时间
-    */
-    private Date getCreatedAt(){
-    return this.createdAt;
-    }
-
-    /**
-    * 更新时间
-    */
-    private Date getUpdatedAt(){
-    return this.updatedAt;
-    }
 
 }
