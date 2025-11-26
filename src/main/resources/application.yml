@@ -1,25 +1,12 @@
 spring:
+  profiles:
+    active: @profileActive@
   application:
     name: blog
-  datasource:
-    username: blog
-    url: jdbc:mysql://192.168.117.129:3306/blog
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    password: 8910jqkA@
   jpa:
     show-sql: true
     properties:
       hibernate:
         format_sql: true
-  data:
-    redis:
-      database: 0
-      host: 192.168.117.129
-      timeout: 10s
-      port: 6379
   cache:
     type: redis
-
-springdoc:
-  api-docs:
-    enabled: true
