@@ -1,4 +1,4 @@
-package org.ml.blog.entity;
+package org.ml.blog.domain.entity;
 
 
 import java.io.Serializable;
@@ -12,6 +12,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
@@ -22,6 +23,7 @@ import org.hibernate.annotations.UuidGenerator;
 
 @Entity
 
+@NoArgsConstructor
 @Getter
 @Setter
 public class Categories implements Serializable {

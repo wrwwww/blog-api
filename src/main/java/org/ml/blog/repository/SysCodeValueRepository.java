@@ -1,6 +1,6 @@
 package org.ml.blog.repository;
 
-import org.ml.blog.entity.SysCodeValue;
+import org.ml.blog.domain.entity.SysCodeValue;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

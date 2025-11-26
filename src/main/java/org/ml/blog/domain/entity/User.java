@@ -1,4 +1,4 @@
-package org.ml.blog.entity;
+package org.ml.blog.domain.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
@@ -21,6 +22,7 @@ import java.util.Date;
 */
 @Entity
 @Getter
+@NoArgsConstructor
 @Setter
 public class User implements Serializable {
 
