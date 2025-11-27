@@ -41,7 +41,7 @@ public class SysCodeValue implements Serializable {
     */
     @NotNull(message="[码表类型ID，外键引用 sys_code_type.id]不能为空")
     @Schema(description="码表类型ID，外键引用 sys_code_type.id")
-    private String typeId;
+    private String codeType;
     /**
     * 实际存储值，如 admin/draft/published
     */

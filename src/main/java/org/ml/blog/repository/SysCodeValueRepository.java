@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface SysCodeValueRepository extends JpaRepository<SysCodeValue, Long> {
-    List<SysCodeValue> findByTypeId(String typeId);
+    List<SysCodeValue> findByCodeType(String codeType);
 
     SysCodeValue findByCodeValue(String codeValue);
 
     SysCodeValue findSysCodeValueById(String id);
 
-    Boolean deleteSysCodeValueById(String id);
+    void deleteSysCodeValueById(String id);
 }

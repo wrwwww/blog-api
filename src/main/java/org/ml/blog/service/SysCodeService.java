@@ -6,8 +6,10 @@ import org.ml.blog.common.ResultCode;
 import org.ml.blog.domain.entity.SysCodeType;
 import org.ml.blog.domain.entity.SysCodeValue;
 import org.ml.blog.domain.form.SysCodeTypeForm;
+import org.ml.blog.domain.form.SysCodeTypeUpdateForm;
 import org.ml.blog.domain.form.SysCodeValueForm;
 import org.ml.blog.domain.form.SysCodeValueUpdateForm;
+import org.ml.blog.domain.vo.PageVO;
 import org.ml.blog.domain.vo.SysCodeTypeVO;
 import org.ml.blog.domain.vo.SysCodeValueVO;
 import org.ml.blog.exception.BizException;
@@ -19,7 +21,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -38,16 +44,23 @@ public class SysCodeService {
         if (type == null) {
             throw new BizException(ResultCode.SYS_ERROR);
         }
-        List<SysCodeValue> codeValueList = sysCodeValueRepository.findByTypeId(type.getId());
+        List<SysCodeValue> codeValueList = sysCodeValueRepository.findByCodeType(type.getCodeType());
         return MyBeanUtils.copyList(codeValueList, SysCodeValueVO::new);
 
     }
 
 
     @Cacheable(value = "sys_code_type", key = "'list'")
-    public List<SysCodeTypeVO> queryList() {
-        List<SysCodeType> all = sysCodeTypeRepository.findAll();
-        return MyBeanUtils.copyList(all, SysCodeTypeVO::new);
+    public PageVO<SysCodeTypeVO> queryList(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<SysCodeType> all = sysCodeTypeRepository.findAll(pageable);
+
+        List<SysCodeTypeVO> list = all.stream().map(e -> {
+            SysCodeTypeVO vo = new SysCodeTypeVO();
+            BeanUtils.copyProperties(e, vo);
+            return vo;
+        }).toList();
+        return PageVO.getPageVO(all, list);
 
     }
 
@@ -71,7 +84,7 @@ public class SysCodeService {
             @CacheEvict(value = "sys_code_type", key = "'list'"),
             @CacheEvict(value = "sys_type", key = "#form.codeType")
     })
-    public SysCodeTypeVO updateSysCodeType(@Valid SysCodeTypeForm form) {
+    public SysCodeTypeVO updateSysCodeType(SysCodeTypeForm form) {
         SysCodeType byCodeType = sysCodeTypeRepository.findByCodeType(form.getCodeType());
         if (byCodeType == null) {
             throw new BizException(ResultCode.DATA_NO_EXISTS);
@@ -88,19 +101,20 @@ public class SysCodeService {
             @CacheEvict(value = "sys_code_type", key = "'list'"),
             @CacheEvict(value = "sys_type", key = "#codeType")
     })
-    public boolean delSysCodeType(String codeType) {
-        List<SysCodeValue> byTypeId = sysCodeValueRepository.findByTypeId(codeType);
+    @Transactional
+    public void delSysCodeType(String codeType) {
+        List<SysCodeValue> byTypeId = sysCodeValueRepository.findByCodeType(codeType);
         if (!CollectionUtils.isEmpty(byTypeId)) {
             throw new BizException(ResultCode.EXISTS_SON);
         }
-        return sysCodeTypeRepository.deleteSysCodeTypesByCodeType(codeType);
+        sysCodeTypeRepository.deleteSysCodeTypesByCodeType(codeType);
 
 
     }
 
-    @CacheEvict(value = "sys_type", key = "#form.typeId")
+    @CacheEvict(value = "sys_type", key = "#form.codeType")
     public SysCodeValueVO insertSysCodeValue(SysCodeValueForm form) {
-        SysCodeType byCodeType = sysCodeTypeRepository.findByCodeType(form.getTypeId());
+        SysCodeType byCodeType = sysCodeTypeRepository.findByCodeType(form.getCodeType());
         if (byCodeType == null) {
             throw new BizException(ResultCode.DATA_NO_EXISTS);
         }
@@ -117,7 +131,7 @@ public class SysCodeService {
     }
 
 
-    @CacheEvict(value = "sys_type", key = "#form.typeId")
+    @CacheEvict(value = "sys_type", key = "#form.codeType")
     public SysCodeValueVO updateSysCodeValue(SysCodeValueUpdateForm form) {
         SysCodeValue sysCodeValueById = sysCodeValueRepository.findSysCodeValueById(form.getId());
         if (sysCodeValueById == null) {
@@ -132,7 +146,8 @@ public class SysCodeService {
     }
 
     @CacheEvict(value = "sys_type", key = "#codeType")
-    public Boolean delSysCodeValue(String codeType,String codeValueId) {
-        return sysCodeValueRepository.deleteSysCodeValueById(codeValueId);
+    @Transactional
+    public void delSysCodeValue(String codeType, String codeValueId) {
+        sysCodeValueRepository.deleteSysCodeValueById(codeValueId);
     }
 }

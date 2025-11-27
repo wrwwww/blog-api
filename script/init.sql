@@ -90,8 +90,17 @@ CREATE TABLE sys_code_value
     created_at  DATETIME             DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     updated_at  DATETIME             DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     UNIQUE KEY uq_type_value (type_id, code_value),
-    FOREIGN KEY (type_id) REFERENCES sys_code_type (id)
+    FOREIGN KEY (type_id) REFERENCES sys_code_type (code_type)
 ) COMMENT ='码表值表';
+# show create table sys_code_value;
+
+--
+# alter table sys_code_value drop foreign key `sys_code_value_ibfk_1`;
+# alter table sys_code_value add constraint `code_type_fk_1` FOREIGN KEY (code_type) REFERENCES sys_code_type (code_type);
+# alter table sys_code_value drop foreign key `code_type_fk_1`;
+# alter table sys_code_value modify code_type varchar(50) not null comment "code_type";
+# alter table sys_code_value change type_id code_type char(36);
+--
 
 insert into sys_code_type(id, code_type, name)
 VALUES ('1e2e29d8-4d39-4348-a86b-eee9ae81d7ab', 'status', '有效标志');

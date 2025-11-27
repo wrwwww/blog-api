@@ -2,23 +2,20 @@ package org.ml.blog.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.ml.blog.common.Result;
 import org.ml.blog.common.ResultCode;
-import org.ml.blog.domain.entity.SysCodeType;
 import org.ml.blog.domain.form.SysCodeTypeForm;
 import org.ml.blog.domain.form.SysCodeValueForm;
 import org.ml.blog.domain.form.SysCodeValueUpdateForm;
+import org.ml.blog.domain.vo.PageVO;
 import org.ml.blog.domain.vo.SysCodeTypeVO;
 import org.ml.blog.domain.vo.SysCodeValueVO;
 import org.ml.blog.exception.BizException;
 import org.ml.blog.service.SysCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,8 +30,8 @@ public class SysCodeController {
 
     @GetMapping("/query")
     @Operation(summary = "码表列表", description = "返回所有的码表类型列表")
-    public Result<List<SysCodeTypeVO>> queryTypeList() {
-        List<SysCodeTypeVO> sysCodeTypes = sysCodeService.queryList();
+    public Result<PageVO<SysCodeTypeVO>> queryTypeList() {
+        PageVO<SysCodeTypeVO> sysCodeTypes = sysCodeService.queryList(0,10);
         return Result.success(sysCodeTypes);
     }
 
@@ -55,7 +52,8 @@ public class SysCodeController {
     @DeleteMapping("/delete/{codeType}")
     @Operation(summary = "删除码表类型", description = "删除码表类型")
     public Result<Boolean> delSysCodeType(@PathVariable("codeType") @Valid @NotNull String codeType) {
-        return Result.success(sysCodeService.delSysCodeType(codeType));
+        sysCodeService.delSysCodeType(codeType);
+        return Result.success(true);
     }
 
     @GetMapping("/value/query/{codeType}")
@@ -84,7 +82,8 @@ public class SysCodeController {
     @DeleteMapping("/value/delete/{codeType}/{codeValueId}")
     @Operation(summary = "删除码表值", description = "删除码表值")
     public Result<Boolean> delSysCodeValue(@PathVariable("codeType") @Valid @NotNull String codeType,@PathVariable("codeValueId") @Valid @NotNull String codeValueId) {
-        return Result.success(sysCodeService.delSysCodeValue(codeType,codeValueId));
+        sysCodeService.delSysCodeValue(codeType,codeValueId);
+        return Result.success(true);
     }
 
 
