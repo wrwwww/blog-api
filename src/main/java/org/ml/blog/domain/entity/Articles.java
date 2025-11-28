@@ -26,7 +26,6 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-
 @NoArgsConstructor
 public class Articles implements Serializable {
 

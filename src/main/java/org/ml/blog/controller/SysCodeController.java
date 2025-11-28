@@ -33,6 +33,7 @@ public class SysCodeController {
     public Result<PageVO<SysCodeTypeVO>> queryTypeList() {
         PageVO<SysCodeTypeVO> sysCodeTypes = sysCodeService.queryList(0,10);
         return Result.success(sysCodeTypes);
+
     }
 
     @PostMapping("/insert")
