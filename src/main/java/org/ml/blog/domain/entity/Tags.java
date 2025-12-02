@@ -32,7 +32,7 @@ public class Tags implements Serializable {
      * 标签ID
      */
     @NotNull(message = "[标签ID]不能为空")
-    @Schema(description="标签ID")
+    @Schema(description = "标签ID")
     @Id
     @GeneratedValue
     @UuidGenerator

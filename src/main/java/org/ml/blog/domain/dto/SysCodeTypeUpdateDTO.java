@@ -1,13 +1,9 @@
-package org.ml.blog.domain.form;
+package org.ml.blog.domain.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.io.Serializable;
 
 /**
  * 码表类型表
@@ -17,8 +13,7 @@ import java.io.Serializable;
 @Getter
 @NoArgsConstructor
 @Setter
-public class SysCodeTypeUpdateForm extends SysCodeTypeForm{
-
+public class SysCodeTypeUpdateDTO extends SysCodeTypeDTO {
 
 
     @NotNull(message = "[]不能为空")

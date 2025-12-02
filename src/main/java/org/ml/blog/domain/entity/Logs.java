@@ -14,7 +14,6 @@ import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.io.Serializable;
-
 import java.util.Date;
 
 /**
@@ -42,28 +41,27 @@ public class Logs implements Serializable {
     /**
      * 操作用户ID，关联 users.id
      */
-    @Schema(description="操作用户ID，关联 users.id")
+    @Schema(description = "操作用户ID，关联 users.id")
     private String userId;
     /**
      * 操作内容
      */
     @NotBlank(message = "[操作内容]不能为空")
     @Size(max = 255, message = "编码长度不能超过255")
-    @Schema(description="操作内容")
+    @Schema(description = "操作内容")
     private String action;
     /**
      * 操作IP
      */
     @Size(max = 50, message = "编码长度不能超过50")
-    @Schema(description="操作IP")
+    @Schema(description = "操作IP")
 
     private String ip;
     /**
      * 操作时间
      */
-    @Schema(description="操作时间")
+    @Schema(description = "操作时间")
     private Date createdAt;
-
 
 
 }

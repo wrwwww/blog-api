@@ -8,5 +8,5 @@ public interface SysCodeTypeRepository extends JpaRepository<SysCodeType, String
 
     SysCodeType findSysCodeTypeById(String id);
 
-     void deleteSysCodeTypesByCodeType(String codeType);
+    void deleteSysCodeTypesByCodeType(String codeType);
 }

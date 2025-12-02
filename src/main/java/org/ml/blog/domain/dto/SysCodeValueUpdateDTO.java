@@ -1,15 +1,14 @@
-package org.ml.blog.domain.form;
+package org.ml.blog.domain.dto;
 
-import jakarta.persistence.GeneratedValue;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.UuidGenerator;
+
 @Getter
 @Setter
 @NoArgsConstructor
-public class SysCodeValueUpdateForm extends SysCodeValueForm {
+public class SysCodeValueUpdateDTO extends SysCodeValueDTO {
 
     @NotNull(message = "[]不能为空")
     private String id;

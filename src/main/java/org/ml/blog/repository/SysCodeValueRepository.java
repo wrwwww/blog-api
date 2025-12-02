@@ -13,4 +13,5 @@ public interface SysCodeValueRepository extends JpaRepository<SysCodeValue, Long
     SysCodeValue findSysCodeValueById(String id);
 
     void deleteSysCodeValueById(String id);
+
 }

@@ -1,4 +1,4 @@
-package org.ml.blog.domain.vo;
+package org.ml.blog.domain.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -13,8 +13,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class SysCodeValueVO implements Serializable {
-    private String id;
+public class SysCodeValueDTO implements Serializable {
+
     /**
      * 码表类型ID，外键引用 sys_code_type.id
      */

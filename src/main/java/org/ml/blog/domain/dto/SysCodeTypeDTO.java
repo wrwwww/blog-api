@@ -1,4 +1,4 @@
-package org.ml.blog.domain.form;
+package org.ml.blog.domain.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -16,9 +16,7 @@ import java.io.Serializable;
 @Getter
 @NoArgsConstructor
 @Setter
-public class SysCodeTypeForm implements Serializable {
-
-
+public class SysCodeTypeDTO implements Serializable {
 
 
     @NotBlank(message = "[码表类型唯一标识，如 role/status/category]不能为空")
